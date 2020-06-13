@@ -1,0 +1,277 @@
+<!--
+@license
+Copyright (c) 2018 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- TITILE -->
+    <title>Contractors Centre</title>
+    <!-- VIEWPORT -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no" />
+    <!-- BASE -->
+    <base href="/">
+    <!-- Javascripts -->
+    <script async src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js" SameSite=None; Secure ></script>
+    
+    <!-- Force Polyfills -->
+    <script async SameSite=None; Secure>
+
+      // Force Polyfills
+      if (window.customElements) window.customElements.forcePolyfill = true;
+      ShadyDOM = { force: true };
+      ShadyCSS = { shimcssproperties: true};
+
+    </script>
+    
+    <!-- PreLink -->
+    <link rel="preconnect" href="https://www.google.com/"           crossorigin SameSite=None; Secure>
+    <link rel="preconnect" href="https://maps.googleapis.com/"      crossorigin SameSite=None; Secure>
+    <link rel="preconnect" href="https://maps.gstatic.com"          crossorigin SameSite=None; Secure>
+    <link rel="preconnect" href="https://www.google-analytics.com"  crossorigin SameSite=None; Secure>
+    <link rel="preconnect" href="https://www.gstatic.com"           crossorigin SameSite=None; Secure>
+    <!-- Google Search <script async src="https://cse.google.com/cse.js?cx=012963876987872265569:528g-_mqpp8" SameSite=None; Secure></script> -->
+    <!-- Google Maps   <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu3QEp8qFaVs_clX7CvMpFB7TrQuUCMGQ&libraries=places" SameSite=None; Secure></script> -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"         SameSite=None; Secure      ></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"        SameSite=None; Secure   ></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"   SameSite=None; Secure    ></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"     SameSite=None; Secure  ></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-messaging.js"   SameSite=None; Secure  ></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"   SameSite=None; Secure  ></script>  
+    <script async SameSite=None; Secure>
+
+      window.dataLayer = window.dataLayer || [];
+      // Google Analytics - Google Ads: 937270922
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-73943527-13', { 'optimize_id': 'GTM-K7D25J6'});
+    </script>
+    <script async SameSite=None; Secure>
+
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator
+          .serviceWorker
+          .register('/sw.js')
+          .then(registration => { console.log(`Service Worker registered! Scope: ${registration.scope}`); })
+          .catch(err => { console.log(`Service Worker registration failed: ${err}`); });
+        });
+      }
+        
+    </script>
+
+    <!-- NODE PRODUCTION -->
+    <script async SameSite=None; Secure>
+      // Redux assumes `process.env.NODE_ENV` exists in the ES module build. https://github.com/reactjs/redux/issues/2907
+      window.process = { env: { NODE_ENV: 'production' } };
+    </script>
+
+    <!-- JSON -->
+    <script async type="application/ld+json">
+      {
+        "@context":                 "https://schema.org",
+        "@type":                    "WebApplication",
+        "datePublished":            "2020-05-01T00:01:59Z",
+        "name":                     "Contractors Centre",
+        "about":                    "Best place to find construction everything. Create Projects. Establish material to buy. Determine tools to buy. Bid for contractors and contracts. Become a contractor to hire. FInd employees to hire.",
+        "operatingSystem":          "JavaScript, Windows, Android, IOS",
+        "applicationCategory":      "Project Management",
+        "applicationSubCategory":   "Construction",
+        "aggregateRating": {
+          "@type":                  "AggregateRating",
+          "ratingValue":            "4.5",
+          "reviewCount":            "5"
+        },
+        "offers":                   "$0.00"
+      }
+    </script>
+    <!-- Syle -->
+    <style>
+      body{
+        margin:                   0;
+        /*min-height:               100vh;*/
+        background-color:         rgba(0,255,0,.1); /*  Grey: ( #f1f1f1 , #f7f7f7 , #e8e8e8 ) rgba(33, 207, 74, .3)  #F0FFF0  2b3c44 */
+        font-family:              Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; /* font-stack - system-default */
+        line-height:              1.5;
+        -webkit-font-smoothing:   antialiased;
+        color:                  black;
+      /*  background-image:         url('images/grass.jpg');
+        background-position:      center;
+        background-repeat:        repeat;
+        background-size:          cover;
+        backdrop-filter:          opacity(20%);*/
+      }
+      a { color:                #793fb9;}
+      .gsc-control-cse {
+        border-radius:      8px!important;
+        background-color:   transparent!important;
+        border:             0!important;
+      }
+      .advert { width:  calc(100% - 10px) }
+     /* @media (min-width: 640px) {
+        .advert { width:  calc(100% - 180px);  }
+      }*/
+    </style>
+    
+    <!--
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin SameSite=None; Secure>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin SameSite=None; Secure>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" SameSite=None; Secure>
+    -->
+
+    <!-- FAVICON -->
+    <link rel="icon"                                    href="images/favicon.ico">
+    <!-- MANIFEST -->
+    <link rel="manifest"                                href="manifest.json" />
+    <link rel="canonical"                               href="https://wwww.contractorscentre.com" />
+    <!-- DESCRIPTION -->
+    <meta name="description"                            content=""/>
+    <!-- THEME COLOR -->
+    <meta name="theme-color"                            content="#fff" />
+    <!-- AUTHOR -->
+    <meta name="author"                                 content="Modern Projects" />
+    <!-- KEYWORDS -->
+    <meta name="keywords"                               content="contractor, contractors, construction, project management, tools, employment, supplies, center, centre, modern, project." />
+    <!-- HTTPS REFERRER TAG-->
+    <meta name="referrer"                               content="origin" />
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable"                 content="yes" />
+    <meta name="application-name"                       content="Contractors" />
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable"           content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"  content="black-translucent" />
+    <meta name="apple-mobile-web-app-title"             content="contractors" />
+    <!-- Homescreen icons -->
+    <link rel="apple-touch-icon"                        href="icon-48x48.png">
+    <link rel="apple-touch-icon" sizes="72x72"          href="icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96"          href="icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="144x144"        href="icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="192x192"        href="icon-192x192.png">
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage"                content="/images/manifest/icon-144x144.png" />
+    <meta name="msapplication-TileColor"                content="#303030" />
+    <meta name="msapplication-tap-highlight"            content="no" />
+    <!--TWITTER -->
+    <meta name="twitter:card"                           content="summary_large_image" />
+    <meta name="twitter:title"                          content="Contractors Centre" />
+    <meta name="twitter:description"                    content="Construction Management Centre for project, supplies, tools, and networking. Post your business card information or find an employee/employment." />
+    <!-- OPEN GRAPH -->
+    <meta property="og:type"                            content="website" />
+    <meta property="og:site_name"                       content="Contractors Centre" />
+    <meta property="og:image"                           content="images/manifest/icon-144x144.png" />
+
+  </head>
+
+  <body>
+
+  <application-shell appTitle="Contractor">
+
+    <!-- Contractors Search   <div class="gcse-search"></div>  -->
+    <div id="ad" slot="search"></div> 
+
+    <!-- Contractors Adsense 
+    <div slot="advert" class="advert">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2634777664576238"
+            data-ad-slot="2969005125"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+      <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+    </div> -->
+
+  </application-shell>
+
+  <noscript id="noScript">
+    <p>A construction application to network with general contractors, subcontractors, and labour.</p>
+    <p>Find construction projects and services from local contractors.</p>
+    <a href="/sitemap.xml"    >Sitemap</a>
+    <p>Contractors Centre helps you to develop a network of construction projects, contractors, and suppliers. Create a business profile to advertise your self in our phonebook. </p>
+    <a href="/projects"       >Projects</a>
+    <p>Project Management of construction projects to create "work breakdown structure". Find Turnkey Projects.</p>
+    <a href="/contractors"          >Inbox</a>
+    <p>Find a contrtactor, contact a contractors</p>
+    <a href="/projects"       >Job Search</a>
+    <p>Find a job. Job Search.</p>
+
+    <p>Purchase Order, Estimate, and Calculator.</p>
+
+    <p>create a Contractor Network to manage projects.</p>
+    <a href="/invoice">Invoice</a>
+    <p>Create an Invoice by tracking project activities.</p>
+
+    <p>
+      Contractors Centre is the cutting-edge and innovative sustainable construction app that is changing the way general contractors and homeowners arrange, organize, and complete modern projects today.
+      As data continues to illustrate the damage and impact modern construction projects are having on our environment, the importance of offering green construction services has never been more critical.  Whether you are a general contractor looking to hire highly qualified, reputable, and sustainable services for your next construction project, or a mindful homeowner committed to hiring a team of environmentally conscious project managers for their next remodeling project, Contractors Centre is your direct path to hiring the eco-friendly team to meet your specific needs.
+      </p>
+      <p>
+      Contractors Centre offers thoughtful solutions designed to connect you with contractors and teams who offer eco-friendly, sustainable, and green services and solutions.  From the Business Profile Advertisement where construction companies and specialists are able to share their business, to the Sustainable Project Advertisement where general contractors and homeowners alike can post the work they need done, Contractors Centre offers quick, clearly, and vetted connections to modern construction providers – all at the palm of your hand.  Contractors Centre even comes with a detailed Job Search option for green-focused construction workers to connect with potential employers with a shared value of offering sustainable and environmentally friendly services.    The Contractors Centre app is truly your key to simple, easy, and sustainable project management, job seeking, and hiring.
+      </p>
+      <p>
+      While Contractors Centre is a dream come true for general contractors and modern project managers alike, this app is a powerful tool for the average homeowner as well.  Contractors Centre gives homeowners direct access to a vast network of green construction services right in their back yard.  Homeowners are able to quickly identify a construction company that meets their needs and budget, all while resting assured that the work they will receive will be sustainable, green, and eco-friendly.
+      </p>
+      <p>
+      Beyond being environmentally and sustainably dedicated, the Contractors Centre app is truly for the general contractor, construction worker, or homeowner who is project driven and quality focused.  With Contractors Centre, you can rest assured that you will be receiving outstanding service that combines outstanding quality and a verified green outcome.
+      </p>
+      <p>
+      To unlock the power of Contractors Centre, simply create your public profile today!  Whether you are a general contractor looking to hire a specific team of sustainable workers, a job seeker wanting to work for an environmentally friendly organization, or a homeowner who want to tackle some jobs around the house – Contractors Centre is the app for you!  Create your free public profile today and start connecting with the sustainable services you need, and the environment deserves.  Download the app and complete your profile today!
+      </p>
+
+    <a href="https://en.wikipedia.org/wiki/Contractor">Contractor</a>
+    <a href="https://www.houzz.com/">Houzz</a>
+    <a href="https://homestars.com">Home Stars</a>
+    <a href="https://www.rcabc.org/">Roofing Contractors Association of British Columbia</a>
+  </noscript>
+  
+  <script async SameSite=None; Secure>
+    // Start Firebase
+    const admin = {
+      apiKey:             "AIzaSyDu3QEp8qFaVs_clX7CvMpFB7TrQuUCMGQ",
+      authDomain:         "contractors-centre.firebaseapp.com",
+      databaseURL:        "https://contractors-centre.firebaseio.com",
+      projectId:          "contractors-centre",
+      storageBucket:      "contractors-centre.appspot.com",
+      messagingSenderId:  "608568494458",
+      appId:              "1:608568494458:web:e4cbde22b46cd280a7aec3",
+      measurementId:      "G-XH8M7B0S17"
+          // credential:           admin.credential.cert() // serviceAccount
+    };
+
+    const application           = firebase.initializeApp(admin);
+    const firestore             = application.firestore();
+
+    firebase
+      .firestore()
+      .settings({ cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED })
+
+    firebase
+      .firestore()
+      .enablePersistence()
+      .catch( (err) => {
+        if        (err.code == 'failed-precondition')   { 'firestore persistence: ', console.log(err.code); }
+        else if   (err.code == 'unimplemented')         { 'firestore persistence: ', console.log(err.code); }
+      });
+
+    firebase
+      .auth()
+      .useDeviceLanguage();
+
+    firebase
+      .analytics();
+
+      console.log(application.name);
+
+  </script>
+
+  <script async type="module" src="deploy/app.js" SameSite=None; Secure></script>
+  </body>
+</html>
