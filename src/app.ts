@@ -24,10 +24,10 @@ export class ApplicationShell extends LitElement {
 
   protected firstUpdated() {
     // EVENT LISTENERS
-    this.shadowRoot!.querySelector('.googleSignIn')!.addEventListener('click', () => { this.google() } );
+    this.shadowRoot!.querySelector('.googleSignIn')!.addEventListener('click', () => { this.googleSignIn() } );
   }
 
-private google() {
+private googleSignIn() {
     // @ts-ignore
     const provider:any = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
